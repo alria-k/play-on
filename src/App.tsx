@@ -1,8 +1,11 @@
 import { FunctionComponent } from "react"
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from 'styled-components';
 
+import { Colors } from "./utils/styleVariables";
+
 import { HomePage } from "./pages"
+import { Header } from "./ui";
 
 const ResetCss = createGlobalStyle`
   *,
@@ -33,13 +36,14 @@ const ResetCss = createGlobalStyle`
     margin: 0;
   }
   body {
+    margin: 15px 0 50px 0;
     min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
-    line-height: 1.5;
     font-family: 'TT-interfaces', sans-serif;
-    font-weight: 400;
     overflow-x: hidden;
+    background-color: ${Colors.BackgroundFill};
+    color: ${Colors.TextColor};
   }
   ul,
   ol,
@@ -47,8 +51,10 @@ const ResetCss = createGlobalStyle`
     list-style: none;
   }
   a {
+    display: inline-block;
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
   }
   img {
     max-width: 100%;
@@ -66,7 +72,7 @@ const ResetCss = createGlobalStyle`
   button {
     cursor: pointer;
   }
-  p{
+  p, a, input{
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -78,20 +84,21 @@ const ResetCss = createGlobalStyle`
   }
   h2, h3, h4, h5, h6{
     font-family: "Poppins", sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
   }
 `;
 
 const App: FunctionComponent = () => {
-
   return (
-    <div>
-      <BrowserRouter basename="/">
-          <ResetCss/>
-          <HomePage/>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter basename="/">
+      <ResetCss/>
+      <Header />
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+        </Routes>
+    {/* <Footer /> */}
+    </BrowserRouter>
   )
 }
 
