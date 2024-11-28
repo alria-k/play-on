@@ -1,8 +1,11 @@
 import { FunctionComponent } from "react";
-import { Header } from "../";
+
+import { Header, AppContainer } from "../";
 
 export const HomePage: FunctionComponent = () => {
     return(
-        <Header/>
+        <div>
+
+        </div>
     )
 }

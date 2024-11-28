@@ -1,5 +1,5 @@
 // COMPONENTS
-export { Header } from "../ui";
+export { Header, AppContainer, LinkText } from "../ui";
 
 // PAGES
 export {HomePage} from './HomePage/HomePage'
