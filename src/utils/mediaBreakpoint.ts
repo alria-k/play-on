@@ -1,4 +1,4 @@
-enum DeviceScreen {
+export enum DeviceScreen {
     MobileXS = '320px',
     MobileS = '375px',
     Mobile = '425px',

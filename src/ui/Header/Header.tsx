@@ -3,23 +3,10 @@ import styled from "styled-components"
 
 import { LinkText } from "../Link/Link"
 import { AppContainer } from "../AppContainer/AppContainer"
-import {Search} from "../Search/Search"
+import { Search } from "../Search/Search"
+import { Navigation } from "../Navigation/Navigation"
+import { mediaBreakpoint, DeviceScreen } from '../../utils/mediaBreakpoint'
 import { pathToImages, Colors } from "../"
-
-const Links = [
-    {
-        text: 'Home',
-        link: '/home'
-    },
-    {
-        text: 'Movies',
-        link: '/movies'
-    },
-    {
-        text: 'Top',
-        link: '/top'
-    },
-]
 
 const HeaderContainer = styled.div`
     display: flex;
@@ -31,19 +18,21 @@ const NavContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
-`
-const NavigationBox = styled.nav`
-    
-`
-const NavLink = styled(LinkText)`
-    margin-right: 50px;
+    ${mediaBreakpoint(DeviceScreen.Laptop, 'max')} {
+        flex-direction: column-reverse;
+        align-items: end;
+        gap: 24px;
+    }
+    ${mediaBreakpoint(DeviceScreen.Tablet, 'max')} {
+        gap: 0;
+    }
 `
 const UserInterfaceContainer = styled.div`
     display: flex;
     align-items: center;
-    flex: auto;
     justify-content: flex-end;
+    margin-left: 50px;
+    width: 100%;
 `
 const UserInterfaceBox = styled.div`
     display: flex;
@@ -64,11 +53,7 @@ export const Header: FunctionComponent = () => {
                     <img src={pathToImages + 'PlayOn.svg'} alt="Logo"/>
                 </LinkText>
                 <NavContainer>
-                    <NavigationBox>
-                        {Links.map(({text, link}, i) => (
-                            <NavLink to={link} key={i}>{text}</NavLink>
-                        ))}
-                    </NavigationBox>
+                    <Navigation/>
                     <UserInterfaceContainer>
                         <Search/>
                         <UserInterfaceBox>

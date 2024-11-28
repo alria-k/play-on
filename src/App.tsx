@@ -36,6 +36,7 @@ const ResetCss = createGlobalStyle`
     margin: 0;
   }
   body {
+    position: relative;
     margin: 15px 0 50px 0;
     min-height: 100vh;
     scroll-behavior: smooth;

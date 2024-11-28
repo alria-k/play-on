@@ -3,33 +3,28 @@ import styled from 'styled-components'
 
 import { Colors, pathToImages } from "../"
 
-interface SearchProps {
-  isActive: boolean
+type SearchProps = {
+  isactive: boolean
 }
 
 const SearchInputContainer = styled.div<SearchProps>`
   display: flex;
   align-items: center;
-  ${({ isActive }) => isActive && `
-    width: 90%;
+  ${({ isactive }) => isactive && `
+    flex: 1;
   `}
 `
 const SearchInputBox = styled.div<SearchProps>`
   display: flex;
   align-items: center;
+  font-size: 16px;
   border-left: 1px solid ${Colors.BorderColor2};
   border-right: 1px solid ${Colors.BorderColor2};
   padding: 3px 6px;
-  width: 0;
-  opacity: 0;
-  visibility: hidden;
-  ${({ isActive }) => isActive && `
-    margin: 0 10px 0 12px;
-    width: 100%;
-    opacity: 1;
-    font-size: 16px;
-    visibility: visible;
-  `}
+  margin: ${({ isactive }) => (isactive ? '0 10px 0 12px' : '0 5px')};
+  width: ${({ isactive }) => (isactive ? '100%' : '0')};
+  opacity: ${({ isactive }) => (isactive ? '1' : '0')};
+  visibility: ${({ isactive }) => (isactive ? 'visible' : 'hidden')};
 `
 const SearchInput = styled.input`
   color: ${Colors.TextColor};
@@ -51,22 +46,36 @@ const CloseBtnIcon = styled.img`
   cursor: pointer;
   width: 20px;
   height: 20px;
-  margin: 0 10px 0 0;
+  margin: 0 10px 0 10px;
 `
 
 export const Search: FunctionComponent = () => {
+    const [textVal, setTextVal] = useState('')
     const [isActive, setIsActive] = useState(false)
 
-    const setActiveHandler = () => {
-      setIsActive(!isActive)
+    const setActiveHandler = (action?: boolean) => {
+      if(action){
+        setIsActive(false)
+        setTextVal('')
+      } else {
+        setIsActive(true)
+      }
     }
 
+    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setTextVal(e.target.value);
+    };
+
   return (
-    <SearchInputContainer isActive={isActive}>
-        <SearchIcon src={pathToImages + 'search-icon.svg'} alt="Notification" onClick={setActiveHandler} />
-        <SearchInputBox isActive={isActive}>
-          <SearchInput type="text" placeholder='Movie/series name or actor/director name' />
-          <CloseBtnIcon src={pathToImages + 'CloseIcon.svg'} alt="Close" onClick={setActiveHandler}/>
+    <SearchInputContainer isactive={isActive}>
+        <SearchIcon src={pathToImages + 'search-icon.svg'} alt="Notification" onClick={() => setActiveHandler()}/>
+        <SearchInputBox isactive={isActive}>
+          <SearchInput type="text" 
+            placeholder='Movie/series name or actor/director name' 
+            value={textVal} 
+            onChange={onInputChange}
+          />
+          <CloseBtnIcon src={pathToImages + 'CloseIcon.svg'} alt="Close" onClick={() => setActiveHandler(true)}/>
         </SearchInputBox>
     </SearchInputContainer>
   )
