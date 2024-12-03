@@ -1,4 +1,4 @@
-import {FunctionComponent, MouseEventHandler, ReactElement, useState} from 'react'
+import {FunctionComponent, useState} from 'react'
 import styled from 'styled-components'
 import { useMediaQuery } from 'usehooks-ts'
 
