@@ -5,7 +5,7 @@ import { createGlobalStyle } from 'styled-components';
 import { Colors } from "./utils/styleVariables";
 
 import { HomePage } from "./pages"
-import { Header } from "./ui";
+import { Layout } from "./ui";
 
 const ResetCss = createGlobalStyle`
   *,
@@ -92,14 +92,20 @@ const ResetCss = createGlobalStyle`
 
 const App: FunctionComponent = () => {
   return (
+    <>
+    <ResetCss/>
     <BrowserRouter basename="/">
-      <ResetCss/>
-      <Header />
         <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" 
+            element={
+                <Layout>
+                  <HomePage />
+                </Layout>
+              } 
+            />
         </Routes>
-    {/* <Footer /> */}
     </BrowserRouter>
+    </>
   )
 }
 
